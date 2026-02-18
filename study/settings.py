@@ -159,13 +159,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # --------------------------------------------------
 # AUTO CREATE SUPERUSER (Render-safe)
 # --------------------------------------------------
+# --------------------------------------------------
+# AUTO CREATE SUPERUSER (Render-safe, TEMPORARY)
+# --------------------------------------------------
 if os.environ.get("CREATE_SUPERUSER") == "True":
     try:
         from django.contrib.auth import get_user_model
         User = get_user_model()
 
         username = os.environ.get("DJANGO_SU_NAME")
-        email = os.environ.get("DJANGO_SU_EMAIL")
+        email = os.environ.get("DJANGO_SU_EMAIL", "")
         password = os.environ.get("DJANGO_SU_PASSWORD")
 
         if username and password:
@@ -175,5 +178,7 @@ if os.environ.get("CREATE_SUPERUSER") == "True":
                     email=email,
                     password=password,
                 )
+                print("Superuser created")
     except Exception as e:
-        print("Superuser creation failed:", e)
+        print("Superuser creation skipped:", e)
+
