@@ -20,7 +20,11 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-secret-key")
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "studyhive-knowledge-sharing-platform-3ksz.onrender.com",
+    ".onrender.com",
+]
+
 
 
 # --------------------------------------------------
